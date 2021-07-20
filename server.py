@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import socket
 import time
-host = socket.gethostbyname(socket.gethostname())
+host = '172.16.51.14'
 port = 9090
 clients = []
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
