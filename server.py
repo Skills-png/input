@@ -2,7 +2,7 @@ import socket, time, os
 clients = [] 
 s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 print(socket.gethostbyname(socket.gethostname()))
-s.bind(('', 9090))
+s.bind(('94.140.136.15', 9090))
 quit = False
 while not quit:
 	try:
