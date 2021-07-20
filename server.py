@@ -16,9 +16,9 @@ while not quit:
         if addr not in clients:
             clients.append(addr)
         itsatime = time.strftime('%Y-%m-%d-%H.%M.%S', time.localtime())
-        print '[' + addr[0] + ']=[' + str(addr[1]) + ']=[' + itsatime \
-            + ']/'
-        print data.decode('utf-8')
+        print( '[' + addr[0] + ']=[' + str(addr[1]) + ']=[' + itsatime \
+            + ']/')
+        print (data.decode('utf-8'))
         for client in clients:
             if addr != client:
                 s.sendto(data, client)
