@@ -1,1 +1,2 @@
-print(str(input('Enter: ')))
+i = str(input('Enter: '))
+print(str(i))
