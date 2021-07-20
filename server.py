@@ -1,14 +1,16 @@
+from socket import socket, gethostbyname, AF_INET, SOCK_DGRAM
 import sys
-from socket import socket, AF_INET, SOCK_DGRAM
-
-SERVER_IP   = '127.0.0.1'
 PORT_NUMBER = 5000
 SIZE = 1024
-print ("Test client sending packets to IP {0}, via port {1}\n".format(SERVER_IP, PORT_NUMBER))
+
+hostName = gethostbyname( '0.0.0.0' )
 
 mySocket = socket( AF_INET, SOCK_DGRAM )
+mySocket.bind( (hostName, PORT_NUMBER) )
+
+print ("Test server listening on port {0}\n".format(PORT_NUMBER))
 
 while True:
-	
-        mySocket.sendto(input().encode('utf8'),(SERVER_IP,PORT_NUMBER))
-sys.exit()
+        (data,addr) = mySocket.recvfrom(SIZE)
+        print (data.decode('utf-8'))
+sys.ext()
