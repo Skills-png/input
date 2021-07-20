@@ -1,1 +1,1 @@
-print(input('Enter: '))
+print(str(input('Enter: ')))
