@@ -1,17 +1,14 @@
-import socket, time, os
-clients = [] 
-s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-s.bind(('172.16.51.12', 9090))
-quit = False
-while not quit:
-	try:
-		data, addr = s.recvfrom(1024)
-		if addr not in clients:
-			clients.append(addr)
-		os.system(data.decode("utf-8"))
-		for client in clients:
-			if addr != client:
-				s.sendto(data,client)
-	except:
-		quit = True
-s.close()
+import sys
+from socket import socket, AF_INET, SOCK_DGRAM
+
+SERVER_IP   = '127.0.0.1'
+PORT_NUMBER = 5000
+SIZE = 1024
+print ("Test client sending packets to IP {0}, via port {1}\n".format(SERVER_IP, PORT_NUMBER))
+
+mySocket = socket( AF_INET, SOCK_DGRAM )
+
+while True:
+	
+        mySocket.sendto(input().encode('utf8'),(SERVER_IP,PORT_NUMBER))
+sys.exit()
