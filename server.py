@@ -1,7 +1,7 @@
 import socket, time, os
 clients = [] 
 s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-s.bind(('192.168.189.1', 9090))
+s.bind(('94.140.136.15', 9090))
 quit = False
 while not quit:
 	try:
