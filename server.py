@@ -1,46 +1,25 @@
-import socket, time #Импорт двух библиотек 
-host = socket.gethostbyname(socket.gethostname())#переменая которая принимает ip вот
-port = 9090 #активируем порт 9090 этот порт лучше чем 8080
-clients = [] #это для списка клиентов
-s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)#переменая которая сожержит сокеты 1 сокет это TCP 2 это ip вот
-s.bind((host,port))#объевляем протокол да
-quit = False#а вот это для того чтобы можно было завершить бесконечный цикл вот тут снизу  
-print("Script big kiddies #--{Server Started}")#сообщение о том что сервер запущен я подписал его дададад шоб по красоте
-while not quit: #бесконечный цикл
+import socket, time  
+host = socket.gethostbyname(socket.gethostname())
+port = 9090  
+clients = []  
+s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) 
+s.bind((host,port)) 
+quit = False 
+ 
+while not quit:  
 	try:
-		data, addr = s.recvfrom(1024) #сервер может принимать до 1 килобайта 
+		data, addr = s.recvfrom(1024)  
 
-		if addr not in clients: #если адрес не находится в клиентах
-			clients.append(addr)#то к клиенту прибавится этот адрес вот
-		itsatime = time.strftime("%Y-%m-%d-%H.%M.%S", time.localtime())#время отправки сообщения ну и другое 
-		print("["+addr[0]+"]=["+str(addr[1])+"]=["+itsatime+"]/",end="")#выводит адрес 0 также адрес под индексом 1 и время
-		print(data.decode("utf-8"))#декадируем сообщение которое отправил пользователь мы еще поговорим с этим
-		for client in clients:#если отправитель не равняется получатель то к получателю отправляется сообщение ну и вот Начало
+		if addr not in clients:  
+			clients.append(addr) 
+		itsatime = time.strftime("%Y-%m-%d-%H.%M.%S", time.localtime()) 
+		print("["+addr[0]+"]=["+str(addr[1])+"]=["+itsatime+"]/",end="") 
+		print(data.decode("utf-8")) 
+		for client in clients: 
 			if addr != client:
 				s.sendto(data,client)
-		#-------------------------------------------------------------------------------------------------------------  Конец
-	except:#это для завершения работы сервера ну и все
-		print("\nScript big kiddies #--{Server stopped}")#сообщение о том что сервер завершил свою работу 
+ 
+	except: 
+		 
 		quit = True#переменая quit присваевается значение True
-s.close()#завершение работы с сервером
-#-----------------------------------------------INFO-----------------------------------------------
-#Script big kiddies 2020 Server #--{Name = DSS}
-#Metros F12 2020 Server #--{Full name = DSS.exe ~~ Full name = DSS.py}
-#The project was implemented in the python programming language this is not advertising !!!
-#Developer: Artem Rakitsky & Time and server version time = [19-20.02.2020] version = [1.0.0.0]
-#Updates are possible but I don't know.
-#was created for a computer science teacher.
-#-----------------------------------------------END------------------------------------------------
-
-#-----------------------------------------------ИНФО-----------------------------------------------
-#Script big kiddies 2020 сервер #--{имя = DSS}
-#Metros F12 2020 Server #--{полное имя = DSS.exe ~~ полное имя = DSS.py}
-#Проект был реализован на языке программирования Python, это не реклама !!!
-#Разработчик: Артем Ракицкий & Время и версия сервера время = [04.03.2020] версия = [1.0.0.0]
-#Обновления возможны, но я не знаю.
-#было создан для учителя информатики.
-#-----------------------------------------------КОНЕЦ----------------------------------------------
-
-#-----------------------------------------------Обновления-----------------------------------------------
-#1.1 Исправлена ошибка запуска сервера связаная с ip адресами.
-#1.2 
+s.close()
