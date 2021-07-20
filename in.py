@@ -7,7 +7,7 @@ import bs4
 import requests
 import os as q
 key = 8194
-ips = socket.gethostbyname(socket.gethostname())
+ips = '172.16.51.14'
 shutdown = False
 join = False
 col = 0
