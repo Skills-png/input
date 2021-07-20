@@ -1,63 +1,14 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-import socket
-import threading
-import time
-import bs4
-import requests
-import os as q
-key = 8194
-ips = '172.16.51.14'
-shutdown = False
-join = False
-col = 0
-max = 10
+import sys
+from socket import socket, AF_INET, SOCK_DGRAM
 
+SERVER_IP   = '127.0.0.1'
+PORT_NUMBER = 5000
+SIZE = 1024
+print ("Test client sending packets to IP {0}, via port {1}\n".format(SERVER_IP, PORT_NUMBER))
 
-def receving(name, sock):
-    while not shutdown:
-        try:
-            while True:
-                (data, addr) = sock.recvfrom(1024)
-                decrypt = ''
-                k = False
-                for i in data.decode('utf-8'):
-                    if i == ':':
-                        k = True
-                        decrypt += i
-                    elif k == False or i == ' ':
-                        decrypt += i
-                    else:
-                        decrypt += chr(ord(i) ^ key)
+mySocket = socket( AF_INET, SOCK_DGRAM )
 
-                print (decrypt)
-                time.sleep(0.2)
-        except:
-            pass
-
-
-host = socket.gethostbyname(socket.gethostname())
-port = 0
-server = (ips, 9090)
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.bind((host, port))
-s.setblocking(0)
-alias = input('Name: ')
-rT = threading.Thread(target=receving, args=('RecvThread', s))
-rT.start()
-while shutdown == False:
-    if join == False:
-        s.sendto(('[' + alias + '] is').encode('utf-8'), server)
-        join = True
-    else:
-        try:
-            message = input()
-            if message != '':
-                s.sendto(('[' + alias + '] ' + message).encode('utf-8'
-                         ), server)
-            time.sleep(0.2)
-        except:
-            s.sendto(('[' + alias + '] close').encode('utf-8'), server)
-            shutdown = True
-rT.join()
-s.close()
+while True:
+	
+        mySocket.sendto(input().encode('utf8'),(SERVER_IP,PORT_NUMBER))
+sys.exit()
