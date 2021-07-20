@@ -37,7 +37,7 @@ rT = threading.Thread(target = receving, args = ("RecvThread",s))
 rT.start()
 while shutdown == False:
 	if join == False:
-		s.sendto(("[" +alias + "] Вошёл в чат").encode("utf-8"),server)
+		s.sendto(("[" +alias + "] is").encode("utf-8"),server)
 		join = True
 	else:
 		try:
@@ -46,7 +46,7 @@ while shutdown == False:
 				s.sendto(("["+alias+"] " + message).encode("utf-8"),server)
 			time.sleep(0.2)
 		except:
-			s.sendto(("["+alias+"] Покинул чат").encode("utf-8"),server)
+			s.sendto(("["+alias+"] close").encode("utf-8"),server)
 			shutdown = True
 rT.join()
 s.close()
